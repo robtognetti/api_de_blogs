@@ -1,6 +1,6 @@
-const tokenJwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 const { User } = require('../models');
-// *sa//
+
 const verifyUserEmail = async (email) => {
     const response = await User.findOne({ where: { email } });
     return response;
@@ -13,10 +13,10 @@ const newUser = async (email, password) => {
     if (password !== user.password) return { status: 400, message: 'Invalid fields' };
 
     const payload = { data: user };
-    const token = tokenJwt.sign(payload, process.env.JWT_SECRET);
+    const token = jwt.sign(payload, process.env.JWT_SECRET);
     return { status: 200, token };
 };
-// *sa //
+
 const getById = async (id) => {
     const user = await User.findByPk(id);
     return user;
