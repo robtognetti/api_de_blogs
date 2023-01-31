@@ -28,8 +28,22 @@ const getPostById = async (req, res) => {
     res.status(200).send(message);
   };
 
-module.exports = {
+  const getUpdatPost = async (request, response) => {
+    const { title, content, userEmail } = request.body;
+
+    const { error, updatedPost } = await postServices.getUpdatPost(
+        
+        { title, content, userEmail },
+    );
+
+    if (error) return response.status(401).send({ message: error });
+
+    response.status(200).send(updatedPost);
+};
+
+  module.exports = {
     getAll,
     getByIdPost,
     getPostById,
+    getUpdatPost,
 };
