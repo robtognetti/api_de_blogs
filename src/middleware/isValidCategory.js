@@ -3,7 +3,7 @@ module.exports = async (req, res, next) => {
   
     if (!name) {
       const err = '"name" is required';
-      return res.status(400).json({ message: err });
+      return res.status(400).send({ message: err });
     }
   
     next();

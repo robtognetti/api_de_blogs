@@ -30,15 +30,15 @@ const newUser = async (req, res) => {
     password,
   );
   if (!message || message === 'unique violation') {
-    return res.status(status).json({ token });
+    return res.status(status).send({ token });
   }
-  return res.status(status).json({ message });
+  return res.status(status).send({ message });
 };
 
 const allUsers = async (req, res) => { 
     const users = await userServices.allUsers();
 
-  return res.status(200).json(users);
+  return res.status(200).send(users);
 };
 
 const userId = async (req, res) => {
@@ -47,10 +47,10 @@ const userId = async (req, res) => {
   const selectedUser = await userServices.userId(id);
 
   if (!selectedUser) {
-      return res.status(404).json({ message: 'User does not exist' });
+      return res.status(404).send({ message: 'User does not exist' });
   } 
 
-  return res.status(200).json(selectedUser);
+  return res.status(200).send(selectedUser);
 };
 
 module.exports = {

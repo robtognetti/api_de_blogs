@@ -2,16 +2,16 @@ const postServices = require('../services/postServices');
 
 const getAll = async (_req, res) => {
     const posts = await postServices.getAll();
-    res.status(200).json(posts);
+    res.status(200).send(posts);
     };
 
 const getByIdPost = async (req, res) => {
     const { id } = req.params;
     const { post, error } = await postServices.getPostById(id);
 
-    if (error) return res.status(404).json({ message: error });
+    if (error) return res.status(404).send({ message: error });
 
-    res.status(200).json(post);
+    res.status(200).send(post);
 };
 
 const getPostById = async (req, res) => {
@@ -23,9 +23,9 @@ const getPostById = async (req, res) => {
   
     const { type, message } = await postServices.getPostById(autentication, id, title, content);
     
-    if (type) return res.status(404).json({ message });
+    if (type) return res.status(404).send({ message });
   
-    res.status(200).json(message);
+    res.status(200).send(message);
   };
 
 module.exports = {

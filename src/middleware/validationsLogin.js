@@ -2,13 +2,13 @@ const validUser = (email, password, res) => {
     if (!email) {
         return res
              .status(400)
-             .json({ message: 'Some required fields are missing' }); 
+             .send({ message: 'Some required fields are missing' }); 
        }
        
          if (!password) {
         return res
              .status(400)
-             .json({ message: 'Some required fields are missing' }); 
+             .send({ message: 'Some required fields are missing' }); 
        }
        
          return null;

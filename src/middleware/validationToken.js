@@ -5,7 +5,7 @@ const { JWT_SECRET } = process.env;
 const validateToken = async (req, res, next) => {
     const token = req.headers.authorization;
 
-    if (!token) return res.status(401).json({ message: 'Token not found' });
+    if (!token) return res.status(401).send({ message: 'Token not found' });
   
     try {
       const payload = jwt.verify(token, JWT_SECRET);
@@ -13,7 +13,7 @@ const validateToken = async (req, res, next) => {
   
       return next();      
     } catch (err) {
-        return res.status(401).json({ message: 'Expired or invalid token' });
+        return res.status(401).send({ message: 'Expired or invalid token' });
     }
 };
 module.exports = {
