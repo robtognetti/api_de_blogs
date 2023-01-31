@@ -6,5 +6,6 @@ const route = Router();
 
 route.get('/', validateToken, postController.getAll);
 route.get('/post/:id', validateToken, postController.getByIdPost);
+route.delete('/post/:id', validateToken, postController.undoPost);
 
 module.exports = route;

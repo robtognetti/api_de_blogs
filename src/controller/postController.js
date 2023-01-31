@@ -51,10 +51,21 @@ const getPostById = async (req, res) => {
     response.status(200).send(updatedPost);
 };
 
+const undoPost = async (req, res) => {
+    const { userEmail } = req.body;
+
+    const { error } = await postServices.undoPost({ userEmail });
+
+    if (error !== 204) return res.status(error).send({ message: error });
+
+    res.status(204).send();
+};
+
   module.exports = {
     getAll,
     getByIdPost,
     getPostById,
     getUpdatPost,
     newPost,
+    undoPost,
 };

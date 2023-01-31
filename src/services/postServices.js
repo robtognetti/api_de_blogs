@@ -51,7 +51,7 @@ const getByIdPost = async (id) => {
                 attributes: { exclude: ['password'] } },
 
                 { model: Category, as: 'categories', through: { attributes: [] } }],
-                
+
     });
 return postIdAuth;
 };
@@ -77,9 +77,26 @@ const getPostById = async (id, body) => {
     return { type: 200, message: updatePost.message };
   };
 
+  const undoPost = async (id, userId) => {
+    const undo = await BlogPost.findByPk(id);
+  
+    if (!undo) {
+ return { 
+        message: 'Post does not exist', 
+    }; 
+}
+  
+    if (undo.id !== userId || undo === 0) {
+      return { message: 'Unauthorized user' };
+    }
+
+    return { message: '' };
+  };
+
 module.exports = {
   getAll,
   getByIdPost,
   getPostById,
   newPost,
+  undoPost,
 };
