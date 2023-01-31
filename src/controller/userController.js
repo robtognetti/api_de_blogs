@@ -53,9 +53,16 @@ const userId = async (req, res) => {
   return res.status(200).send(selectedUser);
 };
 
+const deleteUser = async (req, res) => {
+  const { email } = req.user;  
+  const { message } = await userServices.deleteUser(email);
+  res.status(message).send();
+};
+
 module.exports = {
     newUser,
     login,
     allUsers,
     userId,
+    deleteUser,
 };
