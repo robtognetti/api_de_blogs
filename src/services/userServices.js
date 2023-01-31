@@ -44,7 +44,6 @@ const deleteUser = async (email) => {
   });
 
   return { type: 204, message: '' };
-  
 };
 
 module.exports = {
