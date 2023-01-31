@@ -1,5 +1,15 @@
 const postServices = require('../services/postServices');
 
+const newPost = async (req, res) => {
+    const token = req.headers.authorization;
+  
+    const { type } = await postServices.newPost(token);
+
+    if (type) return res.status(400).send(token);
+  
+    res.status(type).send(token);
+  };
+
 const getAll = async (_req, res) => {
     const posts = await postServices.getAll();
     res.status(200).send(posts);
@@ -32,7 +42,7 @@ const getPostById = async (req, res) => {
     const { title, content, userEmail } = request.body;
 
     const { error, updatedPost } = await postServices.getUpdatPost(
-        
+
         { title, content, userEmail },
     );
 
@@ -46,4 +56,5 @@ const getPostById = async (req, res) => {
     getByIdPost,
     getPostById,
     getUpdatPost,
+    newPost,
 };

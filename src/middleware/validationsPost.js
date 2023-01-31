@@ -1,12 +1,10 @@
-const validationUpdatePost = (req, res, next) => {
+const validationUpdatePost = (req, res) => {
     const { title, content, categoryIds } = req.body;
 
     if (!title || !content || !categoryIds) {
-        res.status(400).json({ message: 'Some required fields are missing' });
-        return;
+        res.status(400).send({ message: 'Some required fields are missing' });
+        return ({ title, content, categoryIds });
     }
-
-    next();
 };
 
 module.exports = {
